@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('index', ['as' => 'trang-chu', 'uses' => 'PageController@getIndex']);
+
+Route::get('product-type/{type}', ['as' => 'product-type', 'uses' => 'PageController@getProductType']);
+
+Route::get('detail-product/{id}', ['as' => 'detail-product', 'uses' => 'PageController@getDetailProduct']);
+
+Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@Contact']);
