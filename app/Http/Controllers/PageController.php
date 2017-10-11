@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Slide;
 use App\Product;
 use App\ProductType;
+use App\Cart;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -35,5 +37,29 @@ class PageController extends Controller
     public function Contact()
     {
     	return view('page.contact');
+    }
+
+    public function Cart(Request $request, $id)
+    {
+    	$product = Product::find($id);
+    	$oldCart = Session('cart') ? Session::get('cart') : null;
+    	$cart = new Cart($oldCart);
+    	$cart->add($product, $id);
+    	$request->session()->put('cart', $cart);
+    	return redirect()->back();
+    }
+
+    public function delCart($id)
+    {
+    	$oldCart = Session::has('cart') ? Session::get('cart') : null;
+    	$cart = new Cart($oldCart);
+    	$cart->removeItem($id);
+    	if (count($cart->items) > 0) {
+    		Session::put('cart', $cart);
+    	} else {
+    		Session::forget('cart');
+    	}
+    	
+    	return redirect()->back();
     }
 }

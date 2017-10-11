@@ -21,3 +21,10 @@ Route::get('product-type/{type}', ['as' => 'product-type', 'uses' => 'PageContro
 Route::get('detail-product/{id}', ['as' => 'detail-product', 'uses' => 'PageController@getDetailProduct']);
 
 Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@Contact']);
+
+Route::get('cart/{id}', ['as' => 'cart', 'uses' => 'PageController@Cart']);
+
+Route::get('del-cart/{id}', ['as' => 'del-cart', 'uses' => 'PageController@delCart']);
+
+Route::get('dat-hang/{id}', ['as' => 'dat-hang', 'uses' => 'PageController@getOrder']);
+Route::post('dat-hang', ['as' => 'dat-hang', 'uses' => 'PageController@postOrder']);
