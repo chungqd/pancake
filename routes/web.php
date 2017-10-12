@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('index', ['as' => 'trang-chu', 'uses' => 'PageController@getIndex']);
+Route::get('/', ['as' => 'trang-chu', 'uses' => 'PageController@getIndex']);
 
 Route::get('product-type/{type}', ['as' => 'product-type', 'uses' => 'PageController@getProductType']);
 
@@ -32,6 +29,7 @@ Route::post('dat-hang', ['as' => 'dat-hang', 'uses' => 'PageController@postOrder
 Route::get('login', ['as' => 'login', 'uses' => 'PageController@getLogin']);
 
 Route::post('login', ['as' => 'login', 'uses' => 'PageController@postLogin']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'PageController@logout']);
 
 // Dang ki
 Route::get('signup', ['as' => 'signup', 'uses' => 'PageController@getSignup']);
