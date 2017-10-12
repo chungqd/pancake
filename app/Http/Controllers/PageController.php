@@ -5,6 +5,7 @@ use App\Slide;
 use App\Product;
 use App\ProductType;
 use App\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use App\User;
@@ -71,6 +72,35 @@ class PageController extends Controller
     public function getLogin()
     {
         return view('page.login');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request,
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6|max:20',
+            ],
+            [
+                'email.required' => "Vui long nhap email",
+                'email.email' => "Khong dung dinh dang email",
+                'password.required' => "Vui long nhap mat khau",
+                'password.min' => "Mk tối thiểu 6 kí tự",
+                'password.max' => "Mk tối da 20 kí tự",
+            ]);
+        $credentials = array('email' => $request->email, 'password' => $request->password);
+        if (Auth::attempt($credentials)) {
+            return redirect()->back()->with(['mess' => 'success', 'thongbao' => 'Dang nhap thanh cong']);
+        } else {
+            return redirect()->back()->with(['mess' => 'danger', 'thongbao' => 'Sai ten dang nhap hoac mat khau']);
+        }
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('trang-chu');
     }
 
     public function getSignup()
