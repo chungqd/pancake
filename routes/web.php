@@ -28,3 +28,12 @@ Route::get('del-cart/{id}', ['as' => 'del-cart', 'uses' => 'PageController@delCa
 
 Route::get('dat-hang/{id}', ['as' => 'dat-hang', 'uses' => 'PageController@getOrder']);
 Route::post('dat-hang', ['as' => 'dat-hang', 'uses' => 'PageController@postOrder']);
+
+Route::get('login', ['as' => 'login', 'uses' => 'PageController@getLogin']);
+
+Route::post('login', ['as' => 'login', 'uses' => 'PageController@postLogin']);
+
+// Dang ki
+Route::get('signup', ['as' => 'signup', 'uses' => 'PageController@getSignup']);
+
+Route::post('signup', ['as' => 'signup', 'uses' => 'PageController@postSignup']);
